@@ -1,0 +1,11 @@
+{
+  "urls": {
+    "authorize_url": "https://secure.snd.payu.com/pl/standard/user/oauth/authorize",
+    "order_url": "https://secure.snd.payu.com/api/v2_1/orders",
+    "notify_url": "https://myproject.onyxcherry.pl/save"
+  },
+  "price": {
+    "insurance_unitprice": 5000,
+    "pycoins_unitprice": 15000
+  }
+}
