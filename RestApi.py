@@ -56,32 +56,32 @@ class RestApi:
     }
 
     data = {
-      "notifyUrl": f"{notify_url}",
-      "customerIp": "127.0.0.1",
-      "merchantPosId": f"{client_id}",
-      "description": "PyCoins",
-      "currencyCode": "PLN",
-      "totalAmount": f"{total_amount}",
-      "buyer": {
-        "email": "john.doe@example.com",
-        "phone": "654111654",
-        "firstName": "John",
-        "lastName": "Doe",
-        "language": "pl"
+      'notifyUrl': f'{notify_url}',
+      'customerIp': '127.0.0.1',
+      'merchantPosId': f'{client_id}',
+      'description': 'PyCoins',
+      'currencyCode': 'PLN',
+      'totalAmount': f'{total_amount}',
+      'buyer': {
+        'email': 'john.doe@example.com',
+        'phone': '654111654',
+        'firstName': 'John',
+        'lastName': 'Doe',
+        'language': 'pl'
       },
-      "settings": {
-        "invoiceDisabled": "true"
+      'settings': {
+        'invoiceDisabled': 'true'
       },
-      "products": [
+      'products': [
         {
-          "name": "PyCoins",
-          "unitPrice": f"{pycoins_unitprice}",
-          "quantity": f"{pycoins_quantity}"
+          'name': 'PyCoins',
+          'unitPrice': f'{pycoins_unitprice}',
+          'quantity': f'{pycoins_quantity}'
         },
         {
-          "name": "Insurance",
-          "unitPrice": f"{insurance_unitprice}",
-          "quantity": "1"
+          'name': 'Insurance',
+          'unitPrice': f'{insurance_unitprice}',
+          'quantity': '1'
         }
       ]
     }
@@ -93,31 +93,20 @@ class RestApi:
     # redirectUri and orderId (with HTTP 302 Found status code)
     # and then redirect to redirectUri, so firstly we get 302
 
-    # Sample redirect link:
-    """
-    https://merch-prod.snd.payu.com/pay/?orderId=MK5KKTSV6Z200517GUEST000P01
-    &token=eyJhbGciOiJIUzI1NiJ9.eyJvcmRlcklkIjoiTUs1S0tUU1Y2WjIwMDUxN0dVRVNUMDA
-    wUDAxIiwicG9zSWQiOiJUNnp3bTgxOCIsImF1dGhvcml0aWVzIjpbIlJPTEVfQ0xJRU5UIl0sIn
-    BheWVyRW1haWwiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImV4cCI6MTU4OTgyNzM2MiwiaXNzI
-    joiUEFZVSIsImF1ZCI6ImFwaS1nYXRld2F5Iiwic3ViIjoiUGF5VSBzdWJqZWN0IiwianRpIjoi
-    MDBiNmZjZmEtYTg5OC00NDc3LTliMzUtMGVmNjhjODdjNDIwIn0.Obn4Qx38IcXqDVd8tlUodBD
-    XKmR_UpFE19AAyUZbRjQ
-    """
-
     if response.status_code == 302:
       response_to_json = json.loads(response.text)
       json_statusCode = response_to_json['status']['statusCode']
 
-      if json_statusCode == "SUCCESS":
+      if json_statusCode == 'SUCCESS':
         redirect_link = response_to_json['redirectUri']
         order_id = response_to_json['orderId']
 
         return redirect_link, order_id
 
       else:
-        sys.exit("Status code different than 'SUCCESS'.")
+        sys.exit('Status code different than SUCCESS.')
     else:
-      sys.exit("Status code different 302.")
+      sys.exit('Status code different 302.')
 
   def get_order_status(self, access_token, order_id):
 
